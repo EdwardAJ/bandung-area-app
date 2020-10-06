@@ -1,3 +1,38 @@
-/*.search-section-bg {*/
-/*    background-color: ;*/
-/*}*/
+.search-section {
+    position: relative;
+    font-family: "Open Sans";
+    width: 31vw;
+    padding-left: 25px;
+    padding-top: 25px;
+}
+
+.search-section .app-title {
+    font-size: 1.6rem;
+    margin-bottom: -3px;
+}
+
+.search-section .app-subtitle {
+    font-size: 0.73rem;
+    color: gray;
+    margin-bottom: 25px;
+}
+
+.search-section input {
+    width: 75%;
+    height: 27px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+}
+
+.search-section .app-info-and-search {
+    z-index: 10;
+}
+
+.result {
+    margin-top: 10px;
+    max-height: 70vh;
+    overflow: auto;
+}
