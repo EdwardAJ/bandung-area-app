@@ -4,8 +4,12 @@ import './SearchSection.css'
 import CardSearch from "./Card/CardSearch"
 import { getAllSubDistricts, filterSubDistrictsByName} from '../../services/subDistricts.services'
 
+type SearchSectionProps = {
+    onDistrictClick: Function
+}
 
-const SearchSection: React.FC = () => {
+const SearchSection: React.FC<SearchSectionProps> = ({ onDistrictClick }) => {
+    const [activeGID, setActiveGID] = useState<string>()
     const [originalSubDistricts, setOriginalSubDistricts] = useState<SubDistricts>()
     const [subDistricts, setSubDistricts] = useState<SubDistricts>()
 
@@ -24,6 +28,12 @@ const SearchSection: React.FC = () => {
         setSubDistricts(filteredSubDistricts)
     }
 
+    function handleOnClick(e: FormEvent<HTMLInputElement>, gID: string): void {
+        e.preventDefault()
+        setActiveGID(gID)
+        onDistrictClick(gID)
+    }
+
     return (
         <section className="search-section">
             <div className="app-info-and-search">
@@ -31,12 +41,16 @@ const SearchSection: React.FC = () => {
                 <p className="app-subtitle">
                     Kini, mencari tempat ibadah di Bandung lebih mudah!
                 </p>
-                <input onInput={handleOnInput} placeholder="Ketik nama kecamatan / kelurahan"/>
+                <input
+                    onInput={handleOnInput}
+                    placeholder="Ketik nama kecamatan / kelurahan"/>
             </div>
             <div className="result">
                 {
                     subDistricts && Object.keys(subDistricts).map((gID: string) => (
                         <CardSearch
+                            onClick={(e: FormEvent<HTMLInputElement>) => handleOnClick(e, gID)}
+                            isActive={gID === activeGID}
                             key={gID}
                             subDistrict={subDistricts[gID].kelurahan}
                             district={subDistricts[gID].kecamatan}
