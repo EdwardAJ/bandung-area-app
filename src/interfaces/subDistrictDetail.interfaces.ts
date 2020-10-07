@@ -1,9 +1,16 @@
+import {Point, MultiPolygon} from "geojson";
+
+export interface PlaceOfWorship {
+    geomjson: Point,
+    tipe: string
+}
+
 export interface SubDistrictDetail {
     [gID: string]: {
-        geomjson: any,
+        geomjson: MultiPolygon,
         kecamatan: string,
         kelurahan: string,
-        sarana_string: Array<any>,
+        sarana_ibadah: Array<PlaceOfWorship>,
     }
 }
 
