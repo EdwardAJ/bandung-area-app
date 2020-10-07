@@ -13,7 +13,7 @@ const SearchSection: React.FC = () => {
                 <input placeholder="Ketik nama kecamatan / kelurahan"/>
             </div>
             <div className="result">
-                <CardSearch subDistrict="Final Result" district="Cidadap" />
+                <CardSearch subDistrict="Final Result 2 lol" district="Cidadap" />
                 <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
                 <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
                 <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
