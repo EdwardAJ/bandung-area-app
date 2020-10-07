@@ -1,8 +1,29 @@
-import React from 'react'
+import React, {FormEvent, useEffect, useState} from 'react'
+import { SubDistricts } from '../../interfaces/subDistricts.interfaces'
 import './SearchSection.css'
-import CardSearch from "./Card/CardSearch";
+import CardSearch from "./Card/CardSearch"
+import { getAllSubDistricts, filterSubDistrictsByName} from '../../services/subDistricts.services'
+
 
 const SearchSection: React.FC = () => {
+    const [originalSubDistricts, setOriginalSubDistricts] = useState<SubDistricts>()
+    const [subDistricts, setSubDistricts] = useState<SubDistricts>()
+
+    useEffect(() => {
+        getAllSubDistricts().then((response) => {
+            if (response) {
+                setOriginalSubDistricts(response.data)
+                setSubDistricts(response.data)
+            }
+        })
+    }, [])
+
+    function handleOnInput (e: FormEvent<HTMLInputElement>): void {
+        e.preventDefault()
+        const filteredSubDistricts: SubDistricts = filterSubDistrictsByName(originalSubDistricts as SubDistricts, (e.target as HTMLTextAreaElement).value)
+        setSubDistricts(filteredSubDistricts)
+    }
+
     return (
         <section className="search-section">
             <div className="app-info-and-search">
@@ -10,20 +31,18 @@ const SearchSection: React.FC = () => {
                 <p className="app-subtitle">
                     Kini, mencari tempat ibadah di Bandung lebih mudah!
                 </p>
-                <input placeholder="Ketik nama kecamatan / kelurahan"/>
+                <input onInput={handleOnInput} placeholder="Ketik nama kecamatan / kelurahan"/>
             </div>
             <div className="result">
-                <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
-                <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
-                <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
-                <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
-                <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
-                <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
-                <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
-                <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
-                <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
-                <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
-                <CardSearch subDistrict="Hegarmanah" district="Cidadap" />
+                {
+                    subDistricts && Object.keys(subDistricts).map((gID: string) => (
+                        <CardSearch
+                            key={gID}
+                            subDistrict={subDistricts[gID].kelurahan}
+                            district={subDistricts[gID].kecamatan}
+                        />
+                    ))
+                }
             </div>
         </section>
     )
