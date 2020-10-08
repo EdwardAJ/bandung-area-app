@@ -2,3 +2,29 @@
     height: 100vh;
     width: 69vw;
 }
+
+.icon-red, .icon-blue, .icon-yellow, .icon-orange, .icon-black {
+    border-radius: 50%;
+}
+
+.icon-red {
+    background-color: red;
+}
+
+.icon-blue {
+    background-color: blue;
+}
+
+.icon-yellow {
+    background-color: yellow;
+}
+
+.icon-orange {
+    background-color: orange;
+}
+
+.icon-black {
+    background-color: black;
+}
+
+

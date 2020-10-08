@@ -9,7 +9,7 @@ export interface SubDistrictDetail {
     [gID: string]: {
         geomjson: MultiPolygon,
         kecamatan: string,
-        kelurahan: string,
+        nama: string,
         sarana_ibadah: Array<PlaceOfWorship>,
     }
 }
